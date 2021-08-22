@@ -1,0 +1,10 @@
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\bin\Debug\win-iap-ymodem.exe.config
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\bin\Debug\win-iap-ymodem.exe
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\bin\Debug\win-iap-ymodem.pdb
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\win_iap_ymodem.Form1.resources
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\win_iap_ymodem.Properties.Resources.resources
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\Laser_Digital_Scope.csproj.GenerateResource.cache
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\Laser_Digital_Scope.csproj.CoreCompileInputs.cache
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\win-iap-ymodem.exe
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\win-iap-ymodem.pdb
+E:\denselight\design\PCsoft\laser_digital_scope\win-iap-ymodem\obj\Debug\Laser_Digital_Scope.csprojAssemblyReference.cache

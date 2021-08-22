@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "win-iap-ymodem", "win-iap-ymodem\win-iap-ymodem.csproj", "{04C7B13D-0399-4722-BEB7-DD6A6D3E2DED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laser_Digital_Scope", "win-iap-ymodem\Laser_Digital_Scope.csproj", "{04C7B13D-0399-4722-BEB7-DD6A6D3E2DED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C38C4447-709E-4BA0-8331-E912E570BBF8}
 	EndGlobalSection
 EndGlobal

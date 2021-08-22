@@ -62,6 +62,7 @@ namespace win_iap_ymodem
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         //private void Form1_Load(object sender, EventArgs e)
@@ -172,7 +173,7 @@ namespace win_iap_ymodem
                 try
                 {
                     serialPort1.Close();
-                    btn_Port.Text = "打开";
+                    btn_Port.Text = "open";
                     HasOpenPort = false;
                 }
                 catch (Exception ex)
@@ -249,10 +250,34 @@ namespace win_iap_ymodem
         /// <param name="e"></param>
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+           
             try
             {
-                string revData = serialPort1.ReadExisting();
-                tbx_show.AppendText(revData);
+              //string revData = serialPort1.ReadExisting();
+                string revData = serialPort1.ReadTo("Laser");
+                // string revData = serialPort1.ReadLine();
+                string packed_str = revData.Substring(revData.IndexOf(":")+1);
+               // tbx_show.AppendText(packed_str);
+                string[] chart = packed_str.Split('/');
+                tbx_show.AppendText(chart[0]);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    this.chart1.Series[i].Points.AddXY(x,Convert.ToDouble(chart[i]));
+                    tbx_show.AppendText(chart[i]);
+                }
+                x += 0.1;
+
+
+                // int packed_index = revData.IndexOf("Packed");
+                // if(packed_index!=-1)
+                // {
+                //     string packed_str = revData.Substring(packed_index);
+                //      //this.textBox6.Text=(packed_str);
+                //     tbx_show.AppendText(packed_str);
+                // }
+
+
             }
             catch
             {
@@ -285,8 +310,8 @@ namespace win_iap_ymodem
 
             progressBar1.Value = 0;
             this.serialPort1.DataReceived -= new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
-            serialPort1.Write("update\r\n");//发送更新命令
-            serialPort1.ReadTimeout = 1000;
+            serialPort1.Write("update\r");//发送更新命令
+            serialPort1.ReadTimeout = 2000;
             try
             {
                 string rec = serialPort1.ReadTo("C");
@@ -692,25 +717,27 @@ namespace win_iap_ymodem
         {
 
         }
+
         //test chart gui
         Random rd = new Random();
         double x, y;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int num = 0;
-            for(num=0;num<2;num++)
-            {
-                y = rd.Next(200, 250);
-                chart1.Series[num].Points.AddXY(x, y);
-                
-            }
-            for (num = 2; num < 5; num++)
-            {
-                y = rd.Next(20, 25);
-                chart1.Series[num].Points.AddXY(x, y);
+            //    int num = 0;
+            //    for(num=0;num<2;num++)
+            //    {
+            //        y = rd.Next(200, 250);
+            //        chart1.Series[num].Points.AddXY(x, y);
 
-            }
-            x += 0.1;
+            //    }
+            //    for (num = 2; num < 5; num++)
+            //    {
+            //        y = rd.Next(20, 25);
+            //        chart1.Series[num].Points.AddXY(x, y);
+
+            //    }
+            serialPort1.Write("capture\r");
+           
 
         }
 
@@ -764,6 +791,16 @@ namespace win_iap_ymodem
 
         }
 
+        private void tbx_show_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             if (timer1.Enabled == false)
@@ -774,6 +811,9 @@ namespace win_iap_ymodem
             {
                 timer1.Enabled = false;
             }
+            // this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // serialPort1.Write("capture\r");
+
         }
     }
 }
