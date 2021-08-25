@@ -192,7 +192,7 @@ namespace win_iap_ymodem
                 try
                 {
                     serialPort1.Open();
-                    btn_Port.Text = "关闭";
+                    btn_Port.Text = "close";
                     HasOpenPort = true;
                 }
                 catch (Exception ex)
@@ -261,10 +261,13 @@ namespace win_iap_ymodem
                 string[] chart = packed_str.Split('/');
                 tbx_show.AppendText(chart[0]);
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    this.chart1.Series[i].Points.AddXY(x,Convert.ToDouble(chart[i]));
-                    tbx_show.AppendText(chart[i]);
+                    if (chart[i] != null)
+                    {
+                        this.chart1.Series[i].Points.AddXY(x, Convert.ToDouble(chart[i]));
+                        tbx_show.AppendText(chart[i]);
+                    }
                 }
                 x += 0.1;
 
@@ -736,8 +739,24 @@ namespace win_iap_ymodem
             //        chart1.Series[num].Points.AddXY(x, y);
 
             //    }
-            serialPort1.Write("capture\r");
-           
+            try
+            {
+                serialPort1.Write("capture\r");
+
+            }
+            catch
+            {
+                if (serialPort1.IsOpen==false)
+                {
+                    MessageBox.Show("串口被关闭");
+
+                }
+               
+                else
+                    MessageBox.Show("未知错误");
+
+            }
+
 
         }
 
@@ -748,26 +767,71 @@ namespace win_iap_ymodem
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox1.Checked == true)
+            {
+                this.chart1.Series[0].Enabled = true;
+            }
+            else
+
+            {
+                this.chart1.Series[0].Enabled = false;
+            }
 
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 
+            if (checkBox2.Checked == true)
+            {
+                this.chart1.Series[1].Enabled = true;
+            }
+            else
+
+            {
+                this.chart1.Series[1].Enabled = false;
+            }
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox5.Checked == true)
+            {
+                this.chart1.Series[4].Enabled = true;
+            }
+            else
+
+            {
+                this.chart1.Series[4].Enabled = false;
+            }
 
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox3.Checked == true)
+            {
+                this.chart1.Series[2].Enabled = true;
+            }
+            else
+
+            {
+                this.chart1.Series[2].Enabled = false;
+            }
 
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox6.Checked == true)
+            {
+                this.chart1.Series[3].Enabled = true;
+            }
+            else
+
+            {
+                this.chart1.Series[3].Enabled = false;
+            }
 
         }
 
@@ -798,6 +862,24 @@ namespace win_iap_ymodem
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "BMP文件 | *.bmp | JPEG文件 | *.jpg";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                if (sfd.FilterIndex == 1)
+                {
+                    chart1.SaveImage(sfd.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+                }
+                else
+                {
+                    chart1.SaveImage(sfd.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+            }
 
         }
 
